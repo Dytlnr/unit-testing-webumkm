@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pesanan;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -43,24 +44,12 @@ class PesananUserController extends Controller
 
         $buktiPath = null;
 
-if ($request->hasFile('bukti_pembayaran')) {
-    $buktiPath = $this->uploadBuktiPembayaran(
-        $request->file('bukti_pembayaran')
-    );
-}
-private function uploadBuktiPembayaran($file)
-{
-    $filename = time() . '_' . $file->getClientOriginalName();
+        if ($request->hasFile('bukti_pembayaran')) {
+            $buktiPath = $this->uploadBuktiPembayaran(
+                $request->file('bukti_pembayaran')
+            );
+        }
 
-    $file->move(public_path('assets/img/'), $filename);
-
-    return 'assets/img/' . $filename;
-}
-
-private function generateKodePesanan()
-{
-    return 'PMN-' . strtoupper(Str::random(6));
-}
         Pesanan::create([
             'code_pemesanan' => $this->generateKodePesanan(),
             'nama' => $request->nama,
@@ -73,13 +62,28 @@ private function generateKodePesanan()
 
         return redirect()->route('tamu.pesanan.create')->with('success', 'Pesanan berhasil dibuat!');
     }
+
+    private function uploadBuktiPembayaran(UploadedFile $file): string
+    {
+        $filename = time() . '_' . $file->getClientOriginalName();
+
+        $file->move(public_path('assets/img/'), $filename);
+
+        return 'assets/img/' . $filename;
+    }
+
+    private function generateKodePesanan()
+    {
+        return 'PMN-' . strtoupper(Str::random(6));
+    }
+
     public function history()
     {
         $pesanans = Pesanan::latest()->get();
         return view('tamu.pesanan.history', compact('pesanans'));
     }
     
-    public function downloadNota($id)
+    public function downloadNota(int $id)
     {
         $pesanan = Pesanan::findOrFail($id);
     
