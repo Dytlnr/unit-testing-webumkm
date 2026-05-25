@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    // Unit Test Laravel
+    // Unit Testing
     public function test_true_is_true()
     {
         $this->assertTrue(true);
