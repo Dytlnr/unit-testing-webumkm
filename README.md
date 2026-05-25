@@ -8,7 +8,7 @@ Project menggunakan framework Laravel dan dilakukan pengujian unit test mengguna
 
 Branch yang digunakan untuk tugas ini:
 
-```text
+
 unit-testing
 Unit Test
 
@@ -52,4 +52,4 @@ DEPR merupakan warning deprecated dari versi PHP/configuration dan bukan kegagal
 
 Bukti Hasil Unit Test
 
-<img width="2048" height="1596" alt="image" src="https://github.com/user-attachments/assets/1caab0ff-4d83-47ff-a02e-bc1aaa44484b" />
+<img width="1437" height="1120" alt="Screenshot 2026-05-25 at 20 51 13" src="https://github.com/user-attachments/assets/5a941c27-d255-4efc-aeff-8ef4d01c1404" />
